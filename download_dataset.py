@@ -3,6 +3,7 @@ import torchvision
 from pathlib import Path
 from torch.utils.data import DataLoader
 import tqdm
+import shutil
 
 transform = transforms.Compose(
     [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
@@ -52,3 +53,10 @@ for dl, ds, split in [
                 # Increment the image count for the class
                 image_counts[split][class_name] += 1
                 pbar.update(1)
+
+# Remove the fashion_raw directory and all its contents
+try:
+    shutil.rmtree('./fashion_raw')
+    print("fashion_raw directory has been removed successfully.")
+except Exception as e:
+    print(f"Error removing directory ./fashion_raw: {e}")
