@@ -18,3 +18,6 @@ Example of using ClearML with PyTorch Lightning for training a simple FashionMNI
 4. Run `python download_dataset.py` to download the FashionMNIST dataset
 5. Run `python upload_dataset.py` to upload the dataset to ClearML
 6. Run `python train.py` to train the model (Copy dataset id from `https://app.clear.ml/datasets`)
+
+ClearML dashboard
+![ClearML dashboard](clearml.png)
