@@ -23,10 +23,15 @@ validation_loader = DataLoader(validation_set, batch_size=bs, shuffle=False)
 dataset_dir = Path("./dataset")
 dataset_dir.mkdir(exist_ok=True)
 
+
 def process_class_name(s: str) -> str:
     return s.replace("/", "_").replace(" ", "_")
 
-image_counts = {split: {process_class_name(class_name): 0 for class_name in training_set.classes} for split in ["train", "valid"]}
+
+image_counts = {
+    split: {process_class_name(class_name): 0 for class_name in training_set.classes}
+    for split in ["train", "valid"]
+}
 
 # Convert FashionMNIST dataset to png images by iterating through the dataset
 # and saving each image as a png file
@@ -47,7 +52,8 @@ for dl, ds, split in [
                 class_name = process_class_name(ds.classes[class_idx[image_idx]])
                 class_path = dataset_dir / split / class_name
                 current_image_count = image_counts[split][class_name]
-                torchvision.utils.save_image(image_tensor,
+                torchvision.utils.save_image(
+                    image_tensor,
                     class_path / f"{current_image_count}.png",
                 )
                 # Increment the image count for the class
@@ -56,7 +62,7 @@ for dl, ds, split in [
 
 # Remove the fashion_raw directory and all its contents
 try:
-    shutil.rmtree('./fashion_raw')
+    shutil.rmtree("./fashion_raw")
     print("fashion_raw directory has been removed successfully.")
 except Exception as e:
     print(f"Error removing directory ./fashion_raw: {e}")
