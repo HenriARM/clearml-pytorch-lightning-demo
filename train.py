@@ -29,6 +29,10 @@ validation_loader = DataLoader(
 )
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Enable cuDNN benchmark for faster training
+torch.backends.cudnn.benchmark = True
+torch.set_float32_matmul_precision("high")
+
 net = LightningModel(GarmentClassifier()).to(device)
 logger = TensorBoardLogger("logs")
 

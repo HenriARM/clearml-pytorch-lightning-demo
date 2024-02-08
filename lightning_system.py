@@ -10,7 +10,7 @@ from torchvision.utils import make_grid
 class LightningModel(pl.LightningModule):
     def __init__(self, backbone: nn.Module):
         super().__init__()
-        self.save_hyperparameters()
+        self.save_hyperparameters(ignore=["backbone"],)
         self.backbone = backbone
         self.criterion = torch.nn.CrossEntropyLoss()
         self.accuracy = Accuracy("multiclass", num_classes=10).to(self.device)
